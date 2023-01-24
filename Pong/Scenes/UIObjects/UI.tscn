@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/BG2.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Bitwise-m19x.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="ScoreP1" type="Label" parent="."]
+margin_left = 464.0
+margin_top = 72.0
+margin_right = 508.0
+margin_bottom = 136.0
+custom_fonts/font = SubResource( 1 )
+text = "00"
+
+[node name="ScoreP2" type="Label" parent="."]
+margin_left = 736.0
+margin_top = 72.0
+margin_right = 824.0
+margin_bottom = 136.0
+custom_fonts/font = SubResource( 1 )
+text = "00"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )

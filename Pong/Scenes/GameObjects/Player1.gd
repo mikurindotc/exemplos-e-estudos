@@ -2,14 +2,17 @@ extends Area2D
 
 signal hit
 
-export var speed = 500
+export var speed = 600
 var player_height = 144
 var screen_size
 var velocity
 var score
+var clampMin = 0 + (player_height/2) + 40
+var clampMax
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	clampMax = screen_size.y - (player_height/2) - 40
 	
 func _process(delta):
 	velocity = Vector2.ZERO
@@ -27,7 +30,7 @@ func move_player():
 
 func clamp_move(delta):
 	position += velocity * delta
-	position.y = clamp(position.y, 0, screen_size.y - player_height)
+	position.y = clamp(position.y, clampMin, clampMax)
 
 func _on_Area2D_body_entered(_body):
 	emit_signal("hit")

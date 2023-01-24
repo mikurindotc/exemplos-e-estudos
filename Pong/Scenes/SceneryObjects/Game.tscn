@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/GameObjects/Player1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/GameObjects/Player2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/SceneryObjects/Game.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/GameObjects/Ball.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/UIObjects/UI.tscn" type="PackedScene" id=5]
 
 [sub_resource type="InputEventAction" id=1]
 action = "ui_accept"
@@ -11,9 +12,22 @@ action = "ui_accept"
 [sub_resource type="ShortCut" id=2]
 shortcut = SubResource( 1 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 19.7801, 5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 640.5, 4 )
+
 [node name="Node" type="Node"]
 script = ExtResource( 3 )
 ball_scene = ExtResource( 4 )
+
+[node name="CanvasLayer" parent="." instance=ExtResource( 5 )]
+
+[node name="Field" type="ColorRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 1 )
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 64, 360 )
@@ -21,15 +35,38 @@ position = Vector2( 64, 360 )
 [node name="Player2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1216, 360 )
 
-[node name="SpawnPlayer1" type="Position2D" parent="."]
-position = Vector2( 0, 360 )
-
 [node name="Button" type="Button" parent="."]
-margin_right = 12.0
-margin_bottom = 20.0
+rect_scale = Vector2( 1e-05, 1e-05 )
 shortcut = SubResource( 2 )
+
+[node name="WallUp" type="Area2D" parent="."]
+position = Vector2( -8, 0 )
+scale = Vector2( 32.3557, 1 )
+
+[node name="WallUpTexture" type="ColorRect" parent="WallUp"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="WallUpHitbox" type="CollisionShape2D" parent="WallUp"]
+position = Vector2( 20.0274, 37 )
+shape = SubResource( 3 )
+
+[node name="WallDown" type="Area2D" parent="."]
+
+[node name="WallDownTexture" type="ColorRect" parent="WallDown"]
+margin_left = -8.0
+margin_top = 680.0
+margin_right = 32.0
+margin_bottom = 720.0
+rect_scale = Vector2( 32.3557, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDown"]
+position = Vector2( 639.5, 684 )
+shape = SubResource( 4 )
 
 [node name="BallSpawn" type="Position2D" parent="."]
 position = Vector2( 640, 360 )
 
+[connection signal="hit" from="Player1" to="." method="_on_Player1_hit"]
+[connection signal="hit" from="Player2" to="." method="_on_Player2_hit"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
