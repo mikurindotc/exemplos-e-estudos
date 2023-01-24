@@ -55,5 +55,10 @@ func _on_ScoreTimer_timeout():
 	$HUD.update_score(score)
 
 func _on_StartTimer_timeout():
+	$MobTimer.wait_time = 0.5
 	$MobTimer.start()
 	$ScoreTimer.start()
+	$DifficultyTimer.start()
+
+func _on_DifficultyTimer_timeout():
+	$MobTimer.wait_time -= 0.05
