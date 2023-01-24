@@ -6,6 +6,7 @@ export var speed = 500
 var player_height = 144
 var screen_size
 var velocity
+var score
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -28,5 +29,5 @@ func clamp_move(delta):
 	position += velocity * delta
 	position.y = clamp(position.y, 0, screen_size.y - player_height)
 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(_body):
 	emit_signal("hit")
