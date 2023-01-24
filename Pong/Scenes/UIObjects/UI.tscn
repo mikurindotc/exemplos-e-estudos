@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/BG2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Bitwise-m19x.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scenes/UIObjects/UI.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
 font_data = ExtResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource( 3 )
 
 [node name="ScoreP1" type="Label" parent="."]
 margin_left = 464.0
