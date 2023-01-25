@@ -42,10 +42,16 @@ func _on_Button_pressed():
 	start_game()
 
 func _on_Player1_hit():
+	var yAbs = abs(ball.linear_velocity.y)
 	ball.linear_velocity.x *= -1
+	ball.linear_velocity.y = yAbs if ball.position.y > $Player1.position.y else -yAbs
+	ball.linear_velocity = ball.linear_velocity.rotated(rand_range(-PI / 8, PI / 8))
 
 func _on_Player2_hit():
+	var yAbs = abs(ball.linear_velocity.y)
 	ball.linear_velocity.x *= -1
+	ball.linear_velocity.y = yAbs if ball.position.y > $Player2.position.y else -yAbs
+	ball.linear_velocity = ball.linear_velocity.rotated(rand_range(-PI / 8, PI / 8))
 
 func _on_WallUp_body_entered(_body):
 	ball.linear_velocity.y *= -1
